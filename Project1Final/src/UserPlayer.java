@@ -43,6 +43,7 @@ public class UserPlayer{
 		int temp;
 		int cardNumber;
 		int cardVal;
+		char cardRank;
 		if(extra_discard == true){
 			maxDiscard = 4;
 		}
@@ -72,14 +73,20 @@ public class UserPlayer{
 
 		for(int n=0; n<intTokens.length; n++){
 			cardNumber = Integer.parseInt(intTokens[n]);
-			cardVal = player_hand.get(cardNumber).getValue();
-			if (cardVal == 5 || cardVal == 8 || cardVal == 13) {
-				//System.out.println("Player is trying to discard card("+cardNumber+") with value" + player_hand.get(cardNumber).getValue());
+			cardVal = player_hand.get(cardNumber-1).getValue();
+			if (cardVal == 13) {
+//			cardRank = player_hand.get(cardNumber-1).getRank();
+//			if(cardRank == 'A'){
+				System.out.println("You have to keep the ace if you wish to discard 4 cards");
+				System.out.println("Otherwise, you may discard 3 cards including the Ace ");
+//				System.out.println("Player is trying to discard card("+cardNumber+") with value" + player_hand.get(cardNumber).getValue());
+//				System.out.println("Player tried to discard Ace, card rank is: " + player_hand.get(cardNumber-1).getRank());
 				check_discarding_ace = false;
 				break;
 			}
 			else{
-				//System.out.println("Player did not try to discard Ace (" + player_hand.get(cardNumber).getValue() + ")");
+//				System.out.println("Player did not try to discard Ace (" + player_hand.get(cardNumber-1).getValue() + ") at card("+cardNumber+")");
+//				System.out.println("Player did not try to discard Ace, card rank is: " + player_hand.get(cardNumber).getRank());
 				check_discarding_ace = true;
 			}
 		}
