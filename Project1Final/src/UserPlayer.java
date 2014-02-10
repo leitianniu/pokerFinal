@@ -77,8 +77,9 @@ public class UserPlayer{
 			if (cardVal == 13) {
 //			cardRank = player_hand.get(cardNumber-1).getRank();
 //			if(cardRank == 'A'){
-				System.out.println("You have to keep the ace if you wish to discard 4 cards");
-				System.out.println("Otherwise, you may discard 3 cards including the Ace ");
+				System.out.println("Are you sure you want to discard the Ace?");
+				System.out.println("You would lose the chance to discard 4 cards.");
+				System.out.println("Please confirm by entering your input again");
 //				System.out.println("Player is trying to discard card("+cardNumber+") with value" + player_hand.get(cardNumber).getValue());
 //				System.out.println("Player tried to discard Ace, card rank is: " + player_hand.get(cardNumber-1).getRank());
 				check_discarding_ace = false;
