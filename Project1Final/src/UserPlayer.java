@@ -6,6 +6,7 @@ public class UserPlayer{
 	
 	static int top_of_deck = 0;
 	static boolean extra_discard = false;
+	static boolean check_discarding_ace = false;
 	static boolean num_in_range = false;
 	private static int[] sorted = null;
 	private static boolean after_discard = false;
@@ -40,6 +41,8 @@ public class UserPlayer{
 		int numToDiscard = 0;
 		int maxDiscard = 3;
 		int temp;
+		int cardNumber;
+		int cardVal;
 		if(extra_discard == true){
 			maxDiscard = 4;
 		}
@@ -67,8 +70,22 @@ public class UserPlayer{
 			}
 		}
 
+		for(int n=0; n<intTokens.length; n++){
+			cardNumber = Integer.parseInt(intTokens[n]);
+			cardVal = player_hand.get(cardNumber).getValue();
+			if (cardVal == 5 || cardVal == 8 || cardVal == 13) {
+				//System.out.println("Player is trying to discard card("+cardNumber+") with value" + player_hand.get(cardNumber).getValue());
+				check_discarding_ace = false;
+				break;
+			}
+			else{
+				//System.out.println("Player did not try to discard Ace (" + player_hand.get(cardNumber).getValue() + ")");
+				check_discarding_ace = true;
+			}
+		}
+		
 		// if the user tries to discard more cards than allowed, keep reading inputs
-		while(line.isEmpty() || (intTokens.length > maxDiscard) || num_in_range == false){
+		while(line.isEmpty() || (intTokens.length > maxDiscard) || num_in_range == false || check_discarding_ace == false){
 			if(intTokens.length > maxDiscard){
 				System.out.println("Attempting to discard more than the max number of cards allowed: " + maxDiscard);
 			}
@@ -92,6 +109,17 @@ public class UserPlayer{
 				}
 				else{
 					num_in_range = true;
+				}
+			}
+			
+			if (check_discarding_ace == false) {
+				if (intTokens.length > 3) {
+					System.out.println("You have to keep the ace if you wish to discard 4 cards");
+					System.out.println("Otherwise, you may discard 3 cards including the Ace ");
+					continue;
+				}
+				else {
+					check_discarding_ace = true;
 				}
 			}
 
